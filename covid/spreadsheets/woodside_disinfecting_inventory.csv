@@ -1,0 +1,13 @@
+﻿item,description,ordered,received,distributed,current_count,needed,utilization_rate
+clorox wipes,12  Canister per case (35ct),132,99,31,68,64,0.313131313
+hand sanitizer-4 Oz.,Case (24 ct),8334,1014,1014,0,N/A,1
+n95 mask,20ct and 30CT,11,11,11,0,N/A,1
+surgical mask (loose),Surgical (loose),149,208,208,0,N/A,1
+surgical mask,Surgical (50 ct box),20,243,51,192,N/A,0.209876543
+gloves-large,10 boxes per case (50 ct box),6,66,61,5,1,0.924242424
+gloves-extra large,10 boxes per case (50 ct box),6,36,6,30,N/A,0.166666667
+gloves-medium,10 boxes per case (50 ct box),0,0,0,0,N/A,N/A
+hand sanitizer-8 Oz.,42 per case,45,45,28,17,28,0.622222222
+hand sanitizer-1 Oz.,20 per pack,25,25,24,1,24,0.96
+hand sanitizer-2 Oz.,100 per case ,10,13,10,3,7,0.769230769
+sanitizing wipes,12 per case (30 Towelettes),6,7,6,1,5,0.857142857
