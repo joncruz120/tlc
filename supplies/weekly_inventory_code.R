@@ -1,251 +1,76 @@
-library(tidyverse)
-library(ggrepel)
-library(magrittr)
-library(scales)
-library(labeling)
-library(readxl)
-library(shiny)
-library(devtools)
-library(gganimate)
-library(moderndive)
-library(na.tools)
-library(ggimage)
-library(janitor)
-library(forcats)
-library(skimr)
-library(ggimage)
-library(ggthemes)
-library(tidytext)
-
-# Read in data
-weekly_chart <- read_csv("weekly_inventory.csv", na = c("N/A", "0"))
-
-# Format column types
-weekly_chart$week_of <-
-  as.Date(weekly_chart$week_of, format = "%m/%d/%Y")
-
-weekly_chart$supply_category <-
-  as.factor(weekly_chart$supply_category)
-
-weekly_chart$utilization_rate <-
-  as.numeric(weekly_chart$utilization_rate)
-
-weekly_chart$current_count <- as.integer(weekly_chart$current_count)
-
-weekly_chart$delivered <- as.integer(weekly_chart$delivered)
-
-weekly_chart$distributed <- as.integer(weekly_chart$distributed)
-
-glimpse(weekly_chart)
-
-weekly_chart <- weekly_chart
-
-# Last week in March chart
-april_4 <- weekly_chart %>% filter(week_of == "2020-04-04" &
-                                     !is.na(utilization_rate)) %>%
-  ggplot(aes(
-    x = reorder(item,-utilization_rate),
-    y = utilization_rate,
-    fill = item
-  )) + geom_bar(stat = "identity", position = "dodge") + scale_y_continuous(labels = scales::percent) +
-  theme(axis.text.x = element_text(angle = 40, hjust = 1)) + labs(x = "Items",
-                                                                  y = "Weekly Utilization Rate",
-                                                                  fill = "Key",
-                                                                  title = "For the week ending: April 4") +
-  geom_text(aes(label = scales::comma(current_count), vjust = -0.5))
-
-show(april_4)
-
-# First week in April
-
-april_11 <- weekly_chart %>% filter(week_of == "2020-04-11" &
-                                      !is.na(utilization_rate)) %>%
-  ggplot(aes(
-    x = reorder(item,-utilization_rate),
-    y = utilization_rate,
-    fill = item
-  )) + geom_bar(stat = "identity", position = "dodge") + scale_y_continuous(labels = scales::percent) +
-  theme(axis.text.x = element_text(angle = 40, hjust = 1)) + labs(x = "Items",
-                                                                  y = "Weekly Utilization Rate",
-                                                                  fill = "Key",
-                                                                  title = "For the week ending: April 11") +
-  geom_text(aes(label = scales::comma(current_count), vjust = -0.5))
-
-show(april_11)
-
-# Second week in April
-
-april_18 <- weekly_chart %>% filter(week_of == "2020-04-18" &
-                                      !is.na(utilization_rate)) %>%
-  ggplot(aes(
-    x = reorder(item,-utilization_rate),
-    y = utilization_rate,
-    fill = item
-  )) + geom_bar(stat = "identity", position = "dodge") + scale_y_continuous(labels = scales::percent) +
-  theme(axis.text.x = element_text(angle = 40, hjust = 1)) + labs(x = "Items",
-                                                                  y = "Weekly Utilization Rate",
-                                                                  fill = "Key",
-                                                                  title = "For the week ending: April 18") +
-  geom_text(aes(
-    label = scales::comma(current_count, accuracy = 1),
-    vjust = -0.5
-  ))
-
-show(april_18)
-
-# Third week in April
-april_25 <- weekly_chart %>% filter(week_of == "2020-04-25" &
-                                      !is.na(utilization_rate)) %>%
-  ggplot(aes(
-    x = reorder(item,-utilization_rate),
-    y = utilization_rate,
-    fill = item
-  )) + geom_bar(stat = "identity", position = "dodge") + scale_y_continuous(labels = scales::percent) +
-  theme(axis.text.x = element_text(angle = 40, hjust = 1)) + labs(x = "Items",
-                                                                  y = "Weekly Utilization Rate",
-                                                                  fill = "Key",
-                                                                  title = "For the week ending: April 25") +
-  geom_text(aes(
-    label = scales::comma(current_count, accuracy = 1),
-    vjust = -0.5
-  ))
-
-show(april_25)
-
-# Last week in April
-may_2 <- weekly_chart %>% filter(week_of == "2020-05-02" &
-                                   !is.na(utilization_rate)) %>%
-  ggplot(aes(
-    x = reorder(item,-utilization_rate),
-    y = utilization_rate,
-    fill = item
-  )) + geom_bar(stat = "identity", position = "dodge") + scale_y_continuous(labels = scales::percent) +
-  theme(axis.text.x = element_text(angle = 40, hjust = 1)) + labs(x = "Items",
-                                                                  y = "Weekly Utilization Rate",
-                                                                  fill = "Key",
-                                                                  title = "For the week ending: May 2") +
-  geom_text(aes(
-    label = scales::comma(current_count, accuracy = 1),
-    vjust = -0.5
-  ))
-
-show(may_2)
-
-
-# First week in May
-
-may_9 <- weekly_chart %>% filter(week_of == "2020-05-09" &
-                                   !is.na(utilization_rate)) %>%
-  ggplot(aes(
-    x = reorder(item,-utilization_rate),
-    y = utilization_rate,
-    fill = item
-  )) + geom_bar(stat = "identity", position = "dodge") + scale_y_continuous(labels = scales::percent) +
-  theme(axis.text.x = element_text(angle = 40, hjust = 1)) + labs(x = "Items",
-                                                                  y = "Weekly Utilization Rate",
-                                                                  fill = "Key",
-                                                                  title = "For the week ending: May 9") +
-  geom_text(aes(
-    label = scales::comma(current_count, accuracy = 1),
-    vjust = -0.5
-  ))
-
-show(may_9)
-
-# Second week in May
-
-may_16 <- weekly_chart %>% filter(week_of == "2020-05-16" &
-                                    !is.na(utilization_rate)) %>%
-  ggplot(aes(
-    x = reorder(item,-utilization_rate),
-    y = utilization_rate,
-    fill = item
-  )) + geom_bar(stat = "identity", position = "dodge") + scale_y_continuous(labels = scales::percent) +
-  theme(axis.text.x = element_text(angle = 40, hjust = 1)) + labs(x = "Items",
-                                                                  y = "Weekly Utilization Rate",
-                                                                  fill = "Key",
-                                                                  title = "For the week ending: May 16") +
-  geom_text(aes(
-    label = scales::comma(current_count, accuracy = 1),
-    vjust = -0.5
-  ))
-
-show(may_16)
-
-# Third week in May
-
-may_23 <- weekly_chart %>% filter(week_of == "2020-05-23" &
-                                    !is.na(utilization_rate)) %>%
-  ggplot(aes(
-    x = reorder(item,-utilization_rate),
-    y = utilization_rate,
-    fill = item
-  )) + geom_bar(stat = "identity", position = "dodge") + scale_y_continuous(labels = scales::percent) +
-  theme(axis.text.x = element_text(angle = 40, hjust = 1)) + labs(x = "Items",
-                                                                  y = "Weekly Utilization Rate",
-                                                                  fill = "Key",
-                                                                  title = "For the week ending: May 23") +
-  geom_text(aes(
-    label = scales::comma(current_count, accuracy = 1),
-    vjust = -0.5
-  ))
-
-show(may_23)
-
-# Fourth week in May
-
-may_30 <- weekly_chart %>% filter(week_of == "2020-05-30" &
-                                    !is.na(utilization_rate)) %>%
-  ggplot(aes(
-    x = reorder(item,-utilization_rate),
-    y = utilization_rate,
-    fill = item
-  )) + geom_bar(stat = "identity", position = "dodge") + scale_y_continuous(labels = scales::percent) +
-  theme(axis.text.x = element_text(angle = 40, hjust = 1)) + labs(x = "Items",
-                                                                  y = "Weekly Utilization Rate",
-                                                                  fill = "Key",
-                                                                  title = "For the week ending: May 30") +
-  geom_text(aes(
-    label = scales::comma(current_count, accuracy = 1),
-    vjust = -0.5
-  ))
-
-show(may_30)
-
 # attach months to dates in new column and then organize columns
 monthly_chart <- weekly_chart %>%
   mutate(month = lubridate::month(week_of, label = TRUE, abbr = FALSE)) %>%
   select(week_of, month, everything())
   
-  facet_titles <- c(
+april_facet_titles <- c(
     "2020-04-04" = "Week ending: April 4",
     "2020-04-11" = "Week ending: April 11",
     "2020-04-18" = "Week ending: April 18",
     "2020-04-25" = "Week ending: April 25"
   )
 
-monthly_chart %>%
+april <- monthly_chart %>%
   filter(month == "April" & !is.na(utilization_rate)) %>%
   ggplot(aes(
     reorder_within(item,-utilization_rate, week_of),
     utilization_rate,
     fill = item
   )) +  scale_x_reordered() +
-  geom_bar(stat = "identity", position = "dodge") +
+  geom_bar(stat = "identity") +
   facet_wrap(~ week_of,
-             scales = "free_x",
-             labeller = as_labeller(facet_titles)) + scale_y_continuous(labels = scales::percent) +
+             scales = "free",
+             labeller = as_labeller(april_facet_titles)) + scale_y_continuous(labels = scales::percent) +
   theme(axis.text.x = element_text(angle = 40, hjust = 1)) + labs(x = "Items",
                                                                   y = "Utilization",
                                                                   fill = "Key",
-                                                                  title = "April") +
+                                                                  title = "April 2020",
+                                                                  caption = "TLC Operations") +
   geom_text(aes(
-    label = scales::comma(distributed, accuracy = 1),
-    vjust = 1.1
-  ), size = 3) +  theme(
+    label = item,
+    vjust = 1.5
+  ), size = 2.5, vjust="inward", angle = 45) +  theme(
     axis.text.x = element_blank(),
     axis.ticks.x = element_blank(),
     strip.background = element_rect(colour = "black", fill = "white"),
-    panel.grid.major = element_blank(), panel.grid.minor = element_blank()
+    panel.grid.major = element_blank(), panel.grid.minor = element_blank(),
+    legend.position = "none", plot.title = element_text(hjust = 0.5)
     
   )
+
+show(april)
+may_facet_titles <- c(
+  "2020-05-02" = "Week ending: May 2",
+  "2020-05-09" = "Week ending: May 9",
+  "2020-05-16" = "Week ending: May 16",
+  "2020-05-23" = "Week ending: May 23",
+  "2020-05-30" = "Week ending: May 30"
+)
+
+may <- monthly_chart %>%
+  filter(month == "May" & !is.na(utilization_rate)) %>%
+  ggplot(aes(
+    reorder_within(item,-utilization_rate, week_of),
+    utilization_rate,
+    fill = item
+  )) +  scale_x_reordered() +
+  geom_bar(stat = "identity") +
+  facet_wrap(~ week_of,
+             scales = "free",
+             labeller = as_labeller(may_facet_titles)) + scale_y_continuous(labels = scales::percent) +
+  theme(axis.text.x = element_text(angle = 40, hjust = 1)) + labs(x = "Items",
+                                                                  y = "Utilization",
+                                                                  fill = "Key",
+                                                                  title = "May 2020",
+                                                                  caption = "TLC Operations") +
+  geom_text(aes(
+    label = item,
+    vjust = -0.5
+  ), size = 2.5, vjust="inward", angle = 45) +  theme(
+    axis.text.x = element_blank(),
+    axis.ticks.x = element_blank(),
+    strip.background = element_rect(colour = "black", fill = "white"),
+    panel.grid.major = element_blank(), panel.grid.minor = element_blank(),
+    legend.position = "none", plot.title = element_text(hjust = 0.5))
+
+show(may)
