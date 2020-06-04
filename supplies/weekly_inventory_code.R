@@ -1,29 +1,10 @@
-library(tidyverse)
-library(ggrepel)
-library(magrittr)
-library(scales)
-library(labeling)
-library(readxl)
-library(shiny)
-library(devtools)
-library(gganimate)
-library(moderndive)
-library(na.tools)
-library(ggimage)
-library(janitor)
-library(forcats)
-library(skimr)
-library(ggimage)
-library(ggthemes)
-library(tidytext)
-
 # read in chart
 weekly_chart <- read_csv("weekly_inventory.csv", na = c("0", "N/A"))
 
 # change column types
 weekly_chart$week_of <- as.Date(weekly_chart$week_of, format = "%m/%d/%Y")
 weekly_chart$site <- as.factor(weekly_chart$site) 
-weekly_chart$supply_category <- as.factor(weekly_chart$supply_category) 
+weekly_chart$supply_category <- as.factor(weekly_chart$supply_category)
 
 # week 1
 april_4 <- weekly_chart %>%
@@ -37,7 +18,7 @@ april_4 <- weekly_chart %>%
           fill = "Key",
           title = "Week ending: April 4",
           caption = "TLC Operations",
-          subtitle = "Note: Labels represent quantity distrubted that week. For gloves, however, it is cases distributed." 
+          subtitle = "Note: Labels represent quantity distributed that week. For gloves, however, it is cases distributed." 
         )
     
 show(april_4)
@@ -54,7 +35,7 @@ april_11 <- weekly_chart %>%
     fill = "Key",
     title = "Week ending: April 11",
     caption = "TLC Operations",
-    subtitle = "Note: Labels represent quantity distrubted that week. For gloves, however, it is cases distributed." 
+    subtitle = "Note: Labels represent quantity distributed that week. For gloves, however, it is cases distributed." 
   )
 
 show(april_11)
@@ -71,7 +52,7 @@ april_18 <- weekly_chart %>%
     fill = "Key",
     title = "Week ending: April 18",
     caption = "TLC Operations",
-    subtitle = "Note: Labels represent quantity distrubted that week. For gloves, however, it is cases distributed." 
+    subtitle = "Note: Labels represent quantity distributed that week. For gloves, however, it is cases distributed." 
   )
 
 show(april_18)
@@ -88,7 +69,7 @@ april_25 <- weekly_chart %>%
     fill = "Key",
     title = "Week ending: April 25",
     caption = "TLC Operations",
-    subtitle = "Note: Labels represent quantity distrubted that week. For gloves, however, it is cases distributed." 
+    subtitle = "Note: Labels represent quantity distributed that week. For gloves, however, it is cases distributed." 
   )
 
 show(april_25)
@@ -106,7 +87,7 @@ may_2 <- weekly_chart %>%
     fill = "Key",
     title = "Week ending: May 2",
     caption = "TLC Operations",
-    subtitle = "Note: Labels represent quantity distrubted that week. For gloves, however, it is cases distributed." 
+    subtitle = "Note: Labels represent quantity distributed that week. For gloves, however, it is cases distributed." 
   )
 
 show(may_2)
@@ -124,7 +105,7 @@ may_9 <- weekly_chart %>%
     fill = "Key",
     title = "Week ending: May 9",
     caption = "TLC Operations",
-    subtitle = "Note: Labels represent quantity distrubted that week. For gloves, however, it is cases distributed." 
+    subtitle = "Note: Labels represent quantity distributed that week. For gloves, however, it is cases distributed." 
   )
 
 show(may_9)
@@ -160,7 +141,7 @@ may_23 <- weekly_chart %>%
     fill = "Key",
     title = "Week ending: May 23",
     caption = "TLC Operations",
-    subtitle = "Note: Labels represent quantity distrubted that week. For gloves, however, it is cases distributed." 
+    subtitle = "Note: Labels represent quantity distributed that week. For gloves, however, it is cases distributed." 
   )
 
 show(may_23)
@@ -178,7 +159,7 @@ may_30 <- weekly_chart %>%
     fill = "Key",
     title = "Week ending: May 30",
     caption = "TLC Operations",
-    subtitle = "Note: Labels represent quantity distrubted that week. For gloves, however, it is cases distributed." 
+    subtitle = "Note: Labels represent quantity distributed that week. For gloves, however, it is cases distributed." 
   )
 
 show(may_30)
