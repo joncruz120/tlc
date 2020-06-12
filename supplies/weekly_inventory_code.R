@@ -1,3 +1,28 @@
+library(tidyverse)
+library(ggrepel)
+library(magrittr)
+library(scales)
+library(labeling)
+library(readxl)
+library(shiny)
+library(devtools)
+library(gganimate)
+library(moderndive)
+library(na.tools)
+library(ggimage)
+library(janitor)
+library(forcats)
+library(skimr)
+library(ggimage)
+library(ggthemes)
+library(tidytext)
+library(png)
+library(grid)
+library(cowplot)
+library(magick)
+library(ggpubr)
+library(gtable)
+
 # read in chart
 weekly_chart <- read_csv("weekly_inventory.csv", na = c("0", "N/A"))
 
@@ -11,11 +36,10 @@ april_4 <- weekly_chart %>%
   filter(week_of == "2020-04-04" & !is.na(utilization_rate)) %>%
   ggplot(aes(reorder(item, -utilization_rate),
              utilization_rate,
-             fill = item)) +geom_text(aes(label = comma(distributed), vjust= -0.25)) + geom_bar(stat = "identity") + scale_y_continuous(labels = scales::percent) +
+             fill = item)) +geom_text(aes(label = comma(distributed, accuracy = 1), vjust= -0.25)) + geom_bar(stat = "identity") + scale_y_continuous(labels = scales::percent) +
   theme(axis.text.x = element_text(angle = 45, hjust = 1), axis.ticks = element_blank(), legend.position = "none", plot.title = element_text(hjust = 0.5)) +labs(
           x = "Items",
           y = "Utilization",
-          fill = "Key",
           title = "Week ending: April 4",
           caption = "TLC Operations",
           subtitle = "Note: Labels represent quantity distributed that week. For gloves, however, it is cases distributed." 
@@ -28,7 +52,7 @@ april_11 <- weekly_chart %>%
   filter(week_of == "2020-04-11" & !is.na(utilization_rate)) %>%
   ggplot(aes(reorder(item, -utilization_rate),
              utilization_rate,
-             fill = item)) +geom_text(aes(label = comma(distributed), vjust= -0.25)) + geom_bar(stat = "identity") + scale_y_continuous(labels = scales::percent) +
+             fill = item)) +geom_text(aes(label = comma(distributed, accuracy = 1), vjust= -0.25)) + geom_bar(stat = "identity") + scale_y_continuous(labels = scales::percent) +
   theme(axis.text.x = element_text(angle = 45, hjust = 1), axis.ticks = element_blank(), legend.position = "none", plot.title = element_text(hjust = 0.5)) +labs(
     x = "Items",
     y = "Utilization",
@@ -62,7 +86,7 @@ april_25 <- weekly_chart %>%
   filter(week_of == "2020-04-25" & !is.na(utilization_rate)) %>%
   ggplot(aes(reorder(item, -utilization_rate),
              utilization_rate,
-             fill = item)) +geom_text(aes(label = comma(distributed), vjust= -0.25)) + geom_bar(stat = "identity") + scale_y_continuous(labels = scales::percent) +
+             fill = item)) +geom_text(aes(label = comma(distributed, accuracy = 1), vjust= -0.25)) + geom_bar(stat = "identity") + scale_y_continuous(labels = scales::percent) +
   theme(axis.text.x = element_text(angle = 45, hjust = 1), axis.ticks = element_blank(), legend.position = "none", plot.title = element_text(hjust = 0.5)) +labs(
     x = "Items",
     y = "Utilization",
@@ -80,7 +104,7 @@ may_2 <- weekly_chart %>%
   filter(week_of == "2020-05-02" & !is.na(utilization_rate)) %>%
   ggplot(aes(reorder(item, -utilization_rate),
              utilization_rate,
-             fill = item)) +geom_text(aes(label = comma(distributed), vjust= -0.25)) + geom_bar(stat = "identity") + scale_y_continuous(labels = scales::percent) +
+             fill = item)) +geom_text(aes(label = comma(distributed, accuracy = 1), vjust= -0.25)) + geom_bar(stat = "identity") + scale_y_continuous(labels = scales::percent) +
   theme(axis.text.x = element_text(angle = 45, hjust = 1), axis.ticks = element_blank(), legend.position = "none", plot.title = element_text(hjust = 0.5)) +labs(
     x = "Items",
     y = "Utilization",
@@ -163,6 +187,42 @@ may_30 <- weekly_chart %>%
   )
 
 show(may_30)
+
+# week 10
+
+june_6 <- weekly_chart %>%
+  filter(week_of == "2020-06-06" & !is.na(utilization_rate)) %>%
+  ggplot(aes(reorder(item, -utilization_rate),
+             utilization_rate,
+             fill = item)) +geom_text(aes(label = comma(distributed), vjust= -0.25)) + geom_bar(stat = "identity") + scale_y_continuous(labels = scales::percent) +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1), axis.ticks = element_blank(), legend.position = "none", plot.title = element_text(hjust = 0.5)) +labs(
+    x = "Items",
+    y = "Utilization",
+    fill = "Key",
+    title = "Week ending: June 6",
+    caption = "TLC Operations",
+    subtitle = "Note: TLC received 80,000 masks and 75 cases of Large gloves." 
+  )
+
+show(june_6)
+
+# week 11
+
+june_13 <- weekly_chart %>%
+  filter(week_of == "2020-06-13" & !is.na(utilization_rate)) %>%
+  ggplot(aes(reorder(item, -utilization_rate),
+             utilization_rate,
+             fill = item)) +geom_text(aes(label = comma(distributed), vjust= -0.25)) + geom_bar(stat = "identity") + scale_y_continuous(labels = scales::percent) +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1), axis.ticks = element_blank(), legend.position = "none", plot.title = element_text(hjust = 0.5)) +labs(
+    x = "Items",
+    y = "Utilization",
+    fill = "Key",
+    title = "Week ending: June 13",
+    caption = "TLC Operations",
+    subtitle = "Note: TLC received cloth masks for all employees." 
+  )
+
+show(june_13)
 
 # attach months to dates in new column and then organize columns
 monthly_chart <- weekly_chart %>%
